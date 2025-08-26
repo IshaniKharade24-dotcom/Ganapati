@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>गणपति की शुभकामनाएं</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Yatra+One&display=swap');
+
+        body {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            text-align: center;
+            background: radial-gradient(circle, #ff9a2a, #e85a19, #a5120a);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+            overflow-x: hidden; /* क्षैतिज स्क्रॉल को रोकें */
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        h1 {
+            font-family: 'Yatra One', cursive;
+            font-size: 3em;
+            color: #ffffff;
+            text-shadow: 3px 3px 5px #a5120a;
+            margin-bottom: 20px;
+        }
+
+        .ganapati-gif {
+            max-width: 90%;
+            max-height: 55vh;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 25px 5px #ffd700;
+            object-fit: contain;
+            border: 2px solid #fff5;
+        }
+        
+        /* 'From: Name' दिखाने के लिए स्टाइल */
+        #fromNameDisplay {
+            margin-top: 20px;
+            font-size: 1.4em;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            min-height: 1.5em; /* खाली होने पर भी जगह बनाए रखें */
+        }
+
+        .share-button-container {
+            padding: 15px 0;
+        }
+
+        .share-button {
+            background-color: #25D366; /* WhatsApp Green */
+            color: white;
+            padding: 12px 25px;
+            border: 1px solid #fff7;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .share-button:hover {
+            background-color: #128C7E;
+            transform: scale(1.05);
+        }
+        
+        .share-button img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        #ad-container {
+            padding-top: 15px;
+            min-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .firework {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle, #fff, #ffd700, transparent);
+            border-radius: 50%;
+            animation: burst 1s ease-out forwards;
+            z-index: -1; /* यह सुनिश्चित करता है कि आतिशबाजी कंटेंट के पीछे रहे */
+        }
+
+        @keyframes burst {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(25); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h1>गणपति बप्पा मोरया</h1>
+
+   <img src="Ganapati.gif" alt="गणपति एनीमेशन">
+        <!-- यह div "From: Name" दिखाएगा -->
+        <div id="fromNameDisplay"></div>
+        
+        <div class="share-button-container">
+            <!-- नया शेयर बटन -->
+            <button class="share-button" id="shareBtn">
+                <img src="https://img.icons8.com/color/48/000000/whatsapp--v1.png" alt="Share Icon">
+                शेयर करें
+            </button>
+        </div>
+    </div>
+    
+    <div id="ad-container">
+        <script type="text/javascript">
+            atOptions = {
+                'key' : 'e7e61a866eefa1c5e0c5ecd91e274d6d',
+                'format' : 'iframe',
+                'height' : 60,
+                'width' : 468,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/e7e61a866eefa1c5e0c5ecd91e274d6d/invoke.js"></script>
+    </div>
+
+    <script>
+        // यह फंक्शन पेज लोड होने पर अपने आप चलता है
+        window.onload = function() {
+            // आतिशबाजी शुरू करें
+            createFireworks();
+
+            // URL से भेजने वाले का नाम निकालने की कोशिश करें
+            const urlParams = new URLSearchParams(window.location.search);
+            const senderName = urlParams.get('name');
+
+            // अगर URL में नाम है, तो एक अलग शुभकामना संदेश दिखाएं
+            if (senderName) {
+                const h1 = document.querySelector('h1');
+                const decodedName = decodeURIComponent(senderName);
+                h1.innerText = ${decodedName} की तरफ से शुभकामनाएं!;
+            }
+        };
+
+        const shareButton = document.getElementById('shareBtn');
+        const fromNameDisplay = document.getElementById('fromNameDisplay');
+
+        // शेयर बटन पर क्लिक करने पर यह फंक्शन चलेगा
+        shareButton.addEventListener('click', async () => {
+            // पॉप-अप में नाम पूछें
+            const name = prompt("अपना नाम लिखें (यदि आप संदेश में शामिल करना चाहते हैं):");
+
+            let shareableLink = window.location.href.split('?')[0];
+            let shareText = "गणपति बप्पा की हार्दिक शुभकामनाएं!";
+
+            // अगर उपयोगकर्ता ने नाम लिखा है
+            if (name && name.trim() !== "") {
+                const trimmedName = name.trim();
+                const encodedName = encodeURIComponent(trimmedName);
+                
+                // तस्वीर के नीचे नाम दिखाएं
+                fromNameDisplay.innerText = From: ${trimmedName};
+                
+                // शेयर करने के लिए लिंक और टेक्स्ट अपडेट करें
+                shareableLink = ${shareableLink}?name=${encodedName};
+                shareText = ${trimmedName} की तरफ से आपको गणपति की हार्दिक शुभकामनाएं!;
+            } else {
+                // अगर नाम नहीं लिखा है, तो 'From' टेक्स्ट खाली रखें
+                fromNameDisplay.innerText = "";
+            }
+
+            const shareData = {
+                title: 'गणपति की शुभकामनाएं',
+                text: shareText,
+                url: shareableLink
+            };
+
+            // Web Share API का उपयोग करके शेयर डायलॉग खोलें
+            try {
+                if (navigator.share) {
+                    await navigator.share(shareData);
+                } else {
+                    // अगर ब्राउज़र सपोर्ट नहीं करता है तो fallback
+                    await navigator.clipboard.writeText(shareableLink);
+                    alert("शेयरिंग समर्थित नहीं है, लिंक क्लिपबोर्ड पर कॉपी किया गया!");
+                }
+            } catch (err) {
+                console.error("शेयर करने में त्रुटि हुई: ", err);
+            }
+        });
+        
+        // आतिशबाजी का प्रभाव बनाने वाला फंक्शन
+        function createFireworks() {
+            setInterval(() => {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                firework.style.left = ${x}px;
+                firework.style.top = ${y}px;
+                
+                document.body.appendChild(firework);
+
+                setTimeout(() => {
+                    firework.remove();
+                }, 1200);
+
+            }, 400);
+        }
+    </script>
+</body>
+</html>
